@@ -1,27 +1,20 @@
 <?php
-
-function calcularIntereses($depositoInicial, $cantidadDias){
-    $tasa=0;
-    $intereses = 0;
-    switch ($cantidadDias) {
-        case 30:
-            $tasa =122;
-            break;
-        case 45:
-            $tasa =130;
-            break;
-        case 60:
-            $tasa =142;
-            break;
-        case 90:
-            $tasa =155;
-            break;
-        default:
-            echo("Error al calular la tasa de interes");
-            break;
+function mostrarUsuario($rutaCompleta){
+    $archivo = fopen($rutaCompleta, 'r');
+    while(!feof($archivo)) {
+        $linea = fgets($archivo);
+        if($linea != ''){
+            //separo los datos 
+            $linea = explode(';', $linea);
+            //muestro los datos
+            echo '<tr>';
+            echo '<td>'.$linea[0].'</td>';
+            echo '<td>'.$linea[1].'</td>';
+            echo '<td>'.$linea[2].'</td>';
+            echo '</tr>';
+        }
     }
-    $intereses = $depositoInicial * ($tasa/100)*($cantidadDias/365);
-    return $intereses;
 }
+
 
 ?>

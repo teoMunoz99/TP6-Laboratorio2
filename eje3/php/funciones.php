@@ -1,27 +1,27 @@
 <?php
 
-function calcularIntereses($depositoInicial, $cantidadDias){
-    $tasa=0;
-    $intereses = 0;
-    switch ($cantidadDias) {
-        case 30:
-            $tasa =122;
-            break;
-        case 45:
-            $tasa =130;
-            break;
-        case 60:
-            $tasa =142;
-            break;
-        case 90:
-            $tasa =155;
-            break;
-        default:
-            echo("Error al calular la tasa de interes");
-            break;
+function mostrarDetalles($rutaCompleta){
+    $total = 0;
+    $archivo = fopen($rutaCompleta, 'r');
+    echo '<table class="table"><tbody>';
+    while(!feof($archivo)) {
+        $linea = fgets($archivo);
+        if($linea != ''){
+            //separo los datos 
+            $linea = explode(';', $linea);
+            //calculo el tiempo
+            $horas = round((strtotime($linea[3]) - strtotime($linea[2]))/3600,0);
+            //muestro los datos
+            echo '<tr class="border">';
+            echo '<td><p class="d-flex justify-content-between">'.$linea[0].' - '.$linea[1].'<span class="badge text-bg-primary d-inline">'.$horas.'</span></p>';
+            echo '<p>$'.$horas*PRECIO_HORA.'</p>';
+            echo '</td>';
+            echo '</tr>';
+            $total = $total + $horas*PRECIO_HORA;
+        }
     }
-    $intereses = $depositoInicial * ($tasa/100)*($cantidadDias/365);
-    return $intereses;
+    echo '</tbody></table>';
+    echo '<article class="border border-3 rounded p-1"><h6>Total</h6><p>$'.$total.'</p></article>';
 }
 
 ?>

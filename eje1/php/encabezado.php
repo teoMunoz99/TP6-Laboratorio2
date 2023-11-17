@@ -10,6 +10,6 @@
 <body>
     <header class="bg-dark text-light p-3 text-center">
         <nav>
-            <h1>Ejercicio 1- tp5</h1>
+            <h1>Ejercicio 1- tp6</h1>
         </nav>
     </header>
